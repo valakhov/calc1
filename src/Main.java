@@ -27,51 +27,79 @@ public class Main {
 
         if (converter.isRoman(splitString[0]) == converter.isRoman(splitString[2])) {
 
-
-            int a, b;
+            int numberOne, numberTwo;
             String c = splitString[1];
-            char d = c.charAt(0);
+            char sign = c.charAt(0);
             boolean isRoman = converter.isRoman(splitString[0]);
 
             if (isRoman) {
-                a = converter.romanToInt(splitString[0]);
-                b = converter.romanToInt(splitString[2]);
-                if (a < 1 || b < 1 || a > 10 || b > 10) {
-                    System.out.println("Пользователь ввел некорректные цифры");
+                numberOne = converter.romanToInt(splitString[0]);
+                numberTwo = converter.romanToInt(splitString[2]);
+                int result = 0;
+
+                if (numberOne < 0 || numberTwo < 0 || numberOne > 10 || numberTwo > 10) {
+                    try {
+                        throw new NullPointerException();
+                    } catch (NullPointerException e) {
+                        System.out.println("Вы ввели некорректные цифры");
+                    }
+                }
+                switch (sign) {
+                    case '+':
+                        result = numberOne + numberTwo;
+                        break;
+                    case '-':
+                        result = numberOne - numberTwo;
+                        break;
+                    case '*':
+                        result = numberOne * numberTwo;
+                        break;
+                    case '/':
+                        result = numberOne / numberTwo;
+                        break;
+                    default:
+                        System.out.println("Вы ввели недопустимое значение");
+                        break;
+                }
+                if (result < 0) {
+                    System.out.println("Результат в римских числах может быть только положительный");
+                } else {
+                    String resultRoman;
+                    resultRoman = converter.intToRoman(result);
+                    System.out.println(resultRoman);
                 }
             } else {
-                a = Integer.parseInt(splitString[0]);
-                b = Integer.parseInt(splitString[2]);
-                if ((a < 1) || (a > 10) || (b < 1) || (b > 10)) {
+                numberOne = Integer.parseInt(splitString[0]);
+                numberTwo = Integer.parseInt(splitString[2]);
+                if ((numberOne < 1) || (numberOne > 10) || (numberTwo < 1) || (numberTwo > 10)) {
                     try {
                         throw new IOException();
                     } catch (IOException e) {
                         System.out.println("Пользователь ввел некорректные цифры");
                     }
                 }
-            }
+                int result = 0;
+                switch (sign) {
+                    case '+':
+                        result = numberOne + numberTwo;
+                        break;
+                    case '-':
+                        result = numberOne - numberTwo;
+                        break;
+                    case '*':
+                        result = numberOne * numberTwo;
+                        break;
+                    case '/':
+                        result = numberOne / numberTwo;
+                        break;
+                    default:
+                        System.out.println("Вы ввели недопустимое значение");
+                        break;
+                }
 
-            int result = 0;
-            switch (d) {
-                case '+':
-                    result = a + b;
-                    break;
-                case '-':
-                    result = a - b;
-                    break;
-                case '*':
-                    result = a * b;
-                    break;
-                case '/':
-                    result = a / b;
-                    break;
-                default:
-                    System.out.println("Вы ввели недопустимое значение");
-                    break;
+                System.out.println(result);
             }
-            System.out.println(result);
             return input;
-
 
         } else {
             System.out.println("Числа должны быть в одном формате");
